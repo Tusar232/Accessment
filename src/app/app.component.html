@@ -1,0 +1,82 @@
+<app-header></app-header>
+
+<div class="container">
+  <section>
+    <div class="example-label"></div>
+    <div class="example-button-row mt-5">
+      <div class="example-flex-container">
+        
+        <div class="example-button-container">
+          <button  mat-fab disabled aria-label="Example icon button with a heart icon" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <mat-icon>add</mat-icon>
+          </button><span class="pl-3">Create Task</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Task Name</label>
+            <input type="text" formControlName="taskName" class="form-control" id="exampleFormControlInput1" >
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Project Name</label>
+            <select class="form-select" formControlName="projectName" aria-label="Default select example">
+              <option selected>Select Project</option>
+              <option value="java project">java project</option>
+              <option value="python project">python project</option>
+              <option value="DevOps project">DevOps project</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
+            <textarea class="form-control" formControlName="comments" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-primary" (click)="postTaskDetails()">Add</button>
+        <button type="button"  class="btn btn-primary" (click)="updateTaskDetails()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Task ID</th>
+      <th scope="col">Task Name</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">Comment</th>
+      <th scope="col">Task Edit</th>
+      <th scope="col">Task Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor= "let item of taskList">
+      <th> {{item.id}} </th>
+      <td>{{item.taskName}}</td>
+      <td>{{item.projectName}}</td>
+      <td> {{item.comments}} </td>
+      <td><button mat-stroked-button data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onEdit(item)">Edit</button></td>
+      <td><button mat-stroked-button (click)="deletedTask(item)">Deletet</button></td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
